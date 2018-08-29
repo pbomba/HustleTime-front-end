@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
 import './App.css';
-import MapContainer from './components/MapContainer'
+import MapContainer from './containers/MapContainer'
+import Home from './containers/Home'
 
 class App extends Component {
   render() {
