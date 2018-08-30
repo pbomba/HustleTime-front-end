@@ -13,9 +13,10 @@ class MapComponent extends Component {
 		}
 	}
 
-	mapMoved() {
-		console.log("map moved to:"+JSON.stringify(this.state.map.getCenter()))
-		this.props.setNewCenter()
+	async mapMoved() {
+		let newCoords = await JSON.stringify(this.state.map.getCenter())
+		let coords = JSON.parse(newCoords)
+		this.props.setNewCenter(coords)
 	}
 
 	mapLoaded(map) {
@@ -27,9 +28,10 @@ class MapComponent extends Component {
 	}
 
 	render() {
-
+		console.log(this.props)
 		const markers = () => {
-			if(this.props.stations.nearby_stations.length !== 0){
+			// console.log(this.props.stations.nearby_stations)
+				if(this.props.stations.nearby_stations.length !== 0){
 				return this.props.stations.nearby_stations.map( (station, idx) => {
 					const arrivals = this.props.stations.arrivals.filter(arrival => {
 						return arrival.nearby_station_id === station.id
@@ -46,7 +48,7 @@ class MapComponent extends Component {
 		return (
 			<GoogleMap
 				ref = {this.mapLoaded.bind(this)}
-				defaultZoom={15.5}
+				defaultZoom={15}
 				center={this.props.currentPosition}
 				onDragEnd={this.mapMoved.bind(this)}
 				clickableIcons={false} >
@@ -57,9 +59,7 @@ class MapComponent extends Component {
 
 
 export default withScriptjs(withGoogleMap(MapComponent));
-// {props.isMarkerShown && <Marker	className="current-location" position={props.position} onClick={props.onMarkerClick}/>}
-//	onClick={(e) => props.mapClick(e)}
-//{lat: 40.701397, lng: -73.986751}
-//ref={(node) => props.setVariable(node)}
-					//ref={node=> { this.node = node; }}
-		// {props.stations ? props.stationMarkers() : null}
+
+
+		// {"lat":40.69663230993338,"lng":-73.98434558456063}
+

@@ -6,7 +6,7 @@ import config from '../config';
 class MapContainer extends PureComponent {
 
   state = {
-    currentPosition: this.props.currentPosition
+    // currentPosition: this.props.currentPosition
   }
 
   render() {
@@ -15,7 +15,7 @@ class MapContainer extends PureComponent {
       <MapComponent
 				googleMapURL={config.MY_KEY}
 				loadingElement={<div style={{ height: `100%` }} />}
-				containerElement={<div style={{ height: `600px`, width: `600px` }} />}
+				containerElement={<div style={{ height: `375px`, width: `375px` }} />}
 				mapElement={<div style={{ height: `100%` }} />}
         currentPosition={this.props.currentPosition}
         stations={this.props.stations}

@@ -25,8 +25,13 @@ class Home extends PureComponent {
 		})
 	}
 
-	setNewCenter = () => {
-		console.log("hit!")
+	setNewCenter = (coords) => {
+		// console.log("hit!")
+		this.setState({
+				currentPosition: {lat: coords.lat, lng:coords.lng}
+			}, ()=> {
+				this.fetchStations()
+			})
 	}
 
 

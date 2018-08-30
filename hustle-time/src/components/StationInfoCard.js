@@ -6,7 +6,6 @@ const StationInfoCard = (props) => {
 
 let timeNow = 1535039870 - 120
 
-
 //Math.floor(new Date().getTime() / 1000)
 
 	return (
@@ -17,15 +16,13 @@ let timeNow = 1535039870 - 120
 					<Item.Header as="a" >
 					</Item.Header>
 					<Item.Meta>
-						<span>
-						</span>
-						<br />
 						<br />
 						<span className="cinema">
+							<strong>{props.station.station}</strong> <br />
 							<strong>
 							North Bound Trains
 							</strong>
-								<p>{props.station.arrival[0].train} :: {Math.floor((props.station.arrival[0].time - timeNow)/60)} minutes</p>
+								<p>{props.station.arrival[0] && props.station.arrival[0].train} :: {Math.floor((props.station.arrival[0].time - timeNow)/60)} minutes</p>
 								<p>{props.station.arrival[1].train} :: {Math.floor((props.station.arrival[1].time - timeNow)/60)} minutes</p>
 							<strong>
 							South Bound Trains
