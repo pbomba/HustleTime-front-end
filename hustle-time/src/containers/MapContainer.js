@@ -3,20 +3,13 @@ import React, { PureComponent } from "react";
 import MapComponent from  '../components/MapComponent';
 import config from '../config';
 
-
-
-
 class MapContainer extends PureComponent {
 
   state = {
     currentPosition: this.props.currentPosition
-
   }
-//
-
 
   render() {
-console.log(this.props)
     return (
 			<div>
       <MapComponent
@@ -26,6 +19,7 @@ console.log(this.props)
 				mapElement={<div style={{ height: `100%` }} />}
         currentPosition={this.props.currentPosition}
         stations={this.props.stations}
+        setNewCenter={this.props.setNewCenter}
       />
 			</div>
     )

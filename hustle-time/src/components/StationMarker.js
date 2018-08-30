@@ -7,7 +7,6 @@ class StationMarker extends PureComponent {
 
 
 	render(){
-		console.log(this.props)
 		return (
 
 			<div>

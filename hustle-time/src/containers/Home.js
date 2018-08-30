@@ -25,6 +25,11 @@ class Home extends PureComponent {
 		})
 	}
 
+	setNewCenter = () => {
+		console.log("hit!")
+	}
+
+
 	fetchStations = () => {
 		fetch(`http://localhost:3000/api/v1/center_points`, {
 		    method: 'POST',
@@ -39,18 +44,19 @@ class Home extends PureComponent {
 	}
 
   render() {
+  	// console.log(this.state)
 
 		const {
 			arrivals,
 			nearbyStations,
 			currentPoint
 		} = this.state.stations
-		console.log(arrivals)
     return (
 			<div>
         <MapContainer
-				currentPosition={this.state.currentPosition}
-				stations={this.state.stations}
+					currentPosition={this.state.currentPosition}
+					stations={this.state.stations}
+					setNewCenter={this.setNewCenter}
 				/>
 			</div>
     );
