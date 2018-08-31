@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps"
+import {withScriptjs, withGoogleMap, GoogleMap, Circle } from "react-google-maps"
 import StationMarker from './StationMarker'
 
 /////WORKING
@@ -28,7 +28,6 @@ class MapComponent extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const markers = () => {
 			// console.log(this.props.stations.nearby_stations)
 				if(this.props.stations.nearby_stations.length !== 0){
@@ -46,14 +45,20 @@ class MapComponent extends Component {
 			}
 		}
 		return (
-			<GoogleMap
-				ref = {this.mapLoaded.bind(this)}
-				defaultZoom={15}
-				center={this.props.currentPosition}
-				onDragEnd={this.mapMoved.bind(this)}
-				clickableIcons={false} >
-				{this.props.stations.length !== 0 ? markers() : null}
-			</GoogleMap>
+			<div>
+				<GoogleMap
+					ref = {this.mapLoaded.bind(this)}
+					defaultZoom={15}
+					defaultOptions={{mapTypeControl: false, fullscreenControl: false, streetViewControl: false}}
+					center={this.props.currentPosition}
+					onDragEnd={this.mapMoved.bind(this)}
+					clickableIcons={false} >
+					{this.props.stations.length !== 0 ? markers() : null}
+				</GoogleMap>
+				<Circle
+					center={this.props.currentPosition}
+					radius={10} />
+				</div>
 			)
 	}}
 

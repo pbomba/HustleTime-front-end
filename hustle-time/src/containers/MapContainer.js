@@ -15,7 +15,7 @@ class MapContainer extends PureComponent {
       <MapComponent
 				googleMapURL={config.MY_KEY}
 				loadingElement={<div style={{ height: `100%` }} />}
-				containerElement={<div style={{ height: `375px`, width: `375px` }} />}
+				containerElement={<div style={{ height: `550px`, width: `375px` }} />}
 				mapElement={<div style={{ height: `100%` }} />}
         currentPosition={this.props.currentPosition}
         stations={this.props.stations}
