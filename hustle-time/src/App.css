@@ -7,7 +7,7 @@
 
 .App-header {
   background-color: #DDD;
-  height: 6em;
+  height: 100px;
   padding: 0px;
   color: white; }
 
@@ -17,34 +17,8 @@
 .App-intro {
   font-size: large; }
 
-.bm-burger-button {
-  position: fixed;
-  width: 4em;
-  height: 4em;
-  left: 1em;
-  top: 1em;
-}
-
-.bm-cross {
-  background: #bdc3c7;
-}
-
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.bm-item-list {
-  color: #b8b7ad;
-  padding: 0.8em;
-}
-
-.bm-item {
-  padding: 1em;
-  font: 16px helvetica, sans-serif;
-  font-weight: bold;
-  color: black;
-  background-color: #33ccff;
-  border: 0px;
-  border-radius: 8px;
-  margin: 2px;
-}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
