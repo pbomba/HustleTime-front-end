@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Item, Label, Modal, Grid } from "semantic-ui-react";
+// import { connect } from 'react-redux'
 
 
 const StationInfoCard = (props) => {
@@ -37,5 +38,10 @@ let timeNow = 1535039870 - 120
 		);
 	}
 
+// const mapStateToProps = (state) => {
+// 	return {
+// 		currentPosition: state.currentPosition
+// 	}
+// }
 
 export default StationInfoCard

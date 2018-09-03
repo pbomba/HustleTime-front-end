@@ -1,13 +1,10 @@
 import React, { PureComponent } from "react";
-//import { Marker} from "react-google-maps"
+
 import MapComponent from  '../components/MapComponent';
 import config from '../config';
 
 class MapContainer extends PureComponent {
 
-  state = {
-    // currentPosition: this.props.currentPosition
-  }
 
   render() {
     return (
@@ -17,9 +14,9 @@ class MapContainer extends PureComponent {
 				loadingElement={<div style={{ height: `100%` }} />}
 				containerElement={<div style={{ height: `550px`, width: `375px` }} />}
 				mapElement={<div style={{ height: `100%` }} />}
-        currentPosition={this.props.currentPosition}
-        stations={this.props.stations}
-        setNewCenter={this.props.setNewCenter}
+        // stations={this.props.stations}
+        // currentPosition={this.props.currentPosition}
+        // setNewCenter={this.props.setNewCenter}
       />
 			</div>
     )

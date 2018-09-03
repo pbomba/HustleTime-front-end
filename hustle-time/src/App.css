@@ -34,13 +34,17 @@
   padding: 0.8em;
 }
 
+.bm-cross {
+  background: #bdc3c7;
+}
+
 .bm-item {
   padding: 1em;
   font: 16px helvetica, sans-serif;
   font-weight: bold;
   color: black;
   background-color: #33ccff;
-  border: 0px;
+  border: 1px solid black;
   border-radius: 8px;
   margin: 2px;
 }

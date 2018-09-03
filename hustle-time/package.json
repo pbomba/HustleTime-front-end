@@ -7,16 +7,15 @@
     "react-burger-menu": "^2.5.2",
     "react-dom": "^16.4.2",
     "react-google-maps": "^9.4.5",
+    "react-redux": "^5.0.7",
     "react-scripts": "1.1.5",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.82.3"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules ./src/App.scss -o ./src",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules --watch ./src/App.scss ./src/App.css",
-    "start-js": "react-scripts start",
-    "start": "PORT=3001 npm-run-all -p watch-css start-js",
-    "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
+    "start": "PORT=3001 react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

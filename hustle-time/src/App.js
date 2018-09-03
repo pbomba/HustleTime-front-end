@@ -4,6 +4,8 @@ import Modal from './components/Modal'
 import './App.css';
 import Home from './containers/Home'
 import { slide as Menu } from 'react-burger-menu'
+import { connect } from 'react-redux'
+
 
 class App extends Component {
   
@@ -25,14 +27,14 @@ class App extends Component {
         <header className="App-header">
           <Menu 
           width = { '100%' }
-          customBurgerIcon={ <img src={logo} /> }
+          customBurgerIcon={ <img src={logo} alt="hustle-time-logo"/> }
           overlayClassName={ 'bm-overlay' }
           crossButtonClassName={ "bm-cross" }
           >
             <button  onClick={() => this.showModal()}>Save Center Point</button>
             <button>Load Center Point</button>
             <Modal isOpen={this.state.modal} onClose={() => this.hideModal()}>
-            <h1>Modal title</h1>
+            <h1>Save Center Point</h1>
             <p>hello</p>
             <p><button onClick={() => this.hideModal()}>Close</button></p>
           </Modal>
@@ -46,4 +48,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    currentPosition: state.currentPosition
+  }
+}
+
+
+export default connect(mapStateToProps)(App);
