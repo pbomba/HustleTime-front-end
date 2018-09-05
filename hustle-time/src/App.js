@@ -10,7 +10,8 @@ import { connect } from 'react-redux'
 class App extends Component {
   
   state = {
-    modal: false
+    modal: false,
+    nameForSave: ""
   }
 
   hideModal = () => {
@@ -21,7 +22,27 @@ class App extends Component {
     this.setState({ modal:true }, () => console.log(this.state))
   }
 
+  setName = (term) => {
+    this.setState({
+      nameForSave: term
+    })
+  }
+
+  saveLocation = () => {
+    fetch(`http://localhost:3000/api/v1/locations`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+       },
+        body: JSON.stringify({lat: `${this.props.currentPosition.lat}`,
+        lng: `${this.props.currentPosition.lng}`,
+        location_name: `${this.state.nameForSave}`})
+    })
+  }
+
   render() {
+      // console.log("save:", this.state.nameForSave, "currentPosition:", this.props.currentPosition)
     return (
       <div className="App">
         <header className="App-header">
@@ -35,7 +56,8 @@ class App extends Component {
             <button>Load Center Point</button>
             <Modal isOpen={this.state.modal} onClose={() => this.hideModal()}>
             <h1>Save Center Point</h1>
-            <p>hello</p>
+            <input type="text" placeholder="name of location" onChange={(e) => this.setName(e.target.value)} />
+            <button onClick={this.saveLocation}>save</button>
             <p><button onClick={() => this.hideModal()}>Close</button></p>
           </Modal>
           </Menu>

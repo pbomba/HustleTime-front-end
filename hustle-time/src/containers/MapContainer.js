@@ -14,9 +14,6 @@ class MapContainer extends PureComponent {
 				loadingElement={<div style={{ height: `100%` }} />}
 				containerElement={<div style={{ height: `550px`, width: `375px` }} />}
 				mapElement={<div style={{ height: `100%` }} />}
-        // stations={this.props.stations}
-        // currentPosition={this.props.currentPosition}
-        // setNewCenter={this.props.setNewCenter}
       />
 			</div>
     )

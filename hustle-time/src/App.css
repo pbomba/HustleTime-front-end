@@ -25,6 +25,13 @@
   top: 1em;
 }
 
+#stationCard {
+  margin: 0px;
+  padding: 0px;
+  font-size: .8em;
+  border-radius: 0px;
+}
+
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }

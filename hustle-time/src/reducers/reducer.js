@@ -1,5 +1,6 @@
 const initialState = {
-	currentPosition: []
+	currentPosition: [],
+	stations: []
 }
 
 const reducer = (state = initialState, action) => {

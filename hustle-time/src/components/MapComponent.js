@@ -17,12 +17,6 @@ class MapComponent extends Component {
 		let newCoords = await JSON.stringify(this.state.map.getCenter())
 		let coords = JSON.parse(newCoords)
 		this.props.dispatchedNewCenter(coords)
-		this.setNewCenter(coords)
-	}
-
-	setNewCenter = (coords) => {
-		this.props.dispatchedNewCenter(coords)
-		this.fetchStations()
 	}
 
 	mapLoaded(map) {
@@ -33,30 +27,28 @@ class MapComponent extends Component {
 		})
 	}
 
+	// getGoogleCode = () => {
+	// 	let formattedCenterPoint = `${this.props.currentPosition.lat},${this.props.currentPosition.lng}`
+	// 	console.log("center: ", formattedCenterPoint)
+	// 	fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${formattedCenterPoint}&radius=200&type=subway_station&key=AIzaSyBTpKcUq12DgAh391xO5DpRU8q3DUb3kZ4`).then(resp => resp.json()).then(json => console.log(json))
+	// }
+
 	getLocation = () => {
 		navigator.geolocation.getCurrentPosition(currentPosition => {
-			// console.log(currentPosition.coords)
 			this.props.dispatchedNewCenter({lat: currentPosition.coords.latitude, lng:currentPosition.coords.longitude})
 		})
-		this.fetchStations()
 	}
 
 	componentDidMount(){
 		this.getLocation()
 	}
 
-	// fetchStations = () => {
-	// 	fetch(`http://localhost:3000/api/v1/center_points`, {
-	// 	    method: 'POST',
-	// 	    headers: {
-	// 	        Accept: 'application/json',
-	// 	        'Content-Type': 'application/json'
-	// 	   },
-	// 	    body: JSON.stringify({centerLat: `${this.props.currentPosition.lat}`,
-	// 	    centerLng: `${this.props.currentPosition.lng}`})
-	// 	}).then(resp => resp.json())
-	// 	  .then(json => this.setState({stations: json}))
-	// }
+	componentDidUpdate(prevProps){
+		if (this.props.currentPosition !== prevProps.currentPosition) {
+			this.fetchStations()
+			// this.getGoogleCode()
+		}
+	}
 
 	fetchStations = () => {
 		fetch(`http://localhost:3000/api/v1/center_points`, {
