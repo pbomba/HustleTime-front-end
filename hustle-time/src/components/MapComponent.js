@@ -92,7 +92,7 @@ class MapComponent extends Component {
 				</GoogleMap>
 				<Circle
 					center={this.props.currentPosition}
-					radius={10} />
+					radius={5} />
 			</div>
 		)
 	}

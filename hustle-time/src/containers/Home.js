@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import config from '../config'
 import MapContainer from './MapContainer'
 
 class Home extends PureComponent {

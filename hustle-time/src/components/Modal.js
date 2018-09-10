@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Modal extends React.Component {
+export default class Modal extends Component {
   render() {
     if (this.props.isOpen === false)
       return null
@@ -11,7 +11,12 @@ export default class Modal extends React.Component {
       left: '50%',
       transform: 'translate(-50%, -50%)',
       zIndex: '9999',
-      background: '#fff'
+      background: '#DDD',
+      borderRadius: '8px',
+      border: '1px solid black',
+      color: 'black',
+      margin: '2px',
+      padding: '1em'
     }
 
     let backdropStyle = {

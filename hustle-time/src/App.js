@@ -11,15 +11,15 @@ class App extends Component {
   
   state = {
     modal: false,
-    nameForSave: ""
+    nameForSave: "",
   }
 
   hideModal = () => {
     this.setState({ modal:false })
   }
 
-  showModal = () => {
-    this.setState({ modal:true }, () => console.log(this.state))
+  showModal = (type) => {
+    return this.setState({ modal:true, modalType:type }, () => console.log(this.state))
   }
 
   setName = (term) => {
@@ -41,8 +41,57 @@ class App extends Component {
     })
   }
 
+
   render() {
       // console.log("save:", this.state.nameForSave, "currentPosition:", this.props.currentPosition)
+    let { stations } = this.props
+    let arrivalNotifications = []
+    if (stations) { arrivalNotifications = stations.map(station => {
+         return <div style={{ height:40 }}> {station.name} </div>
+    })}
+
+    let buttons
+    let modalType
+
+    if (this.props.user) {
+        buttons = 
+        [<button onClick={() => this.showModal(1)}>Save Favorite Place</button>,
+        <button onClick={() => this.showModal(2)}>Load Favorite Place</button>]
+      } else {
+        buttons = <button onClick={() => this.showModal(3)}>Log In </button>
+      }
+
+    if (this.state.modalType === 1) {
+      // modal for saving center point
+      modalType = <div>
+        <Modal isOpen={this.state.modal} onClose={() => this.hideModal()}>
+            <h3>Save Favorite Place</h3>
+            <input type="text" placeholder="name of location" onChange={(e) => this.setName(e.target.value)} />
+            <p style={{fontSize:".2em", fontStyle:'italic'}}>{this.props.currentPosition.lat}, {this.props.currentPosition.lng}</p>
+            <p> <button className="bm-item" onClick={this.saveLocation}>save</button></p>
+            <p><button onClick={() => this.hideModal()}>Close</button></p>
+          </Modal>
+        </div>
+    } else if (this.state.modalType === 2) {
+      // modal for retrieving center point
+      modalType = <div>
+        <Modal isOpen={this.state.modal} onClose={() => this.hideModal()}>
+        <h2>Favorite Places</h2>
+        </Modal>
+      </div>
+
+    } else {
+      // modal for logging in
+      modalType = <div>
+          <Modal isOpen={this.state.modal} onClose={() => this.hideModal()}>
+            <input className="bm-item" type="text" placeholder="username" />
+            <input className="bm-item" type="text" placeholder="password" />
+            <button className="bm-item" >submit</button>
+            <p><button className="bm-item" onClick={() => this.hideModal()}>Close</button></p>
+          </Modal>
+        </div>
+    }
+
     return (
       <div className="App">
         <header className="App-header">
@@ -52,19 +101,16 @@ class App extends Component {
           overlayClassName={ 'bm-overlay' }
           crossButtonClassName={ "bm-cross" }
           >
-            <button  onClick={() => this.showModal()}>Save Center Point</button>
-            <button>Load Center Point</button>
-            <Modal isOpen={this.state.modal} onClose={() => this.hideModal()}>
-            <h1>Save Center Point</h1>
-            <input type="text" placeholder="name of location" onChange={(e) => this.setName(e.target.value)} />
-            <button onClick={this.saveLocation}>save</button>
-            <p><button onClick={() => this.hideModal()}>Close</button></p>
-          </Modal>
+            {buttons}
           </Menu>
+            {modalType}
         </header>
         <main>
           <Home />
         </main>
+            <div style={{position: 'absolute', bottom: 0, left:0, right:0, backgroundColor: 'white'}}>
+              {arrivalNotifications}
+            </div>
       </div>
     );
   }
@@ -72,7 +118,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentPosition: state.currentPosition
+    currentPosition: state.currentPosition,
+    stations: state.stations.nearby_stations
   }
 }
 
