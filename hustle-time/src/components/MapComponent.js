@@ -46,7 +46,6 @@ class MapComponent extends Component {
 	componentDidUpdate(prevProps){
 		if (this.props.currentPosition !== prevProps.currentPosition) {
 			this.fetchStations()
-			// this.getGoogleCode()
 		}
 	}
 
@@ -79,6 +78,7 @@ class MapComponent extends Component {
 			  })
 			}
 		}
+		console.log(this.props.currentPosition)
 		return (
 			<div>
 				<GoogleMap

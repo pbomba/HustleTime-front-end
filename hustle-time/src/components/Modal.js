@@ -32,7 +32,7 @@ export default class Modal extends Component {
     return (
       <div>
         <div style={modalStyle}>{this.props.children}</div>
-        <div style={backdropStyle} onClick={e => this.close(e)}/>}
+        <div style={backdropStyle} onClick={e => this.close(e)}/>
       </div>
     )
   }
