@@ -16,7 +16,7 @@ export const fetchStations = (stations) => {
 	}
 }
 
-export const loginUser  = (user, password) => {
+export const loginUser = (user, password) => {
   return (dispatch) => {
     return fetchLoginUser(user, password).then(userObj => {
     	if (userObj.message) {
@@ -30,5 +30,24 @@ export const loginUser  = (user, password) => {
       	return userObj
     	}
     })
+  }
+}
+
+export const logOut = () => {
+  return{
+    type: LOGOUT_USER
+  }
+}
+
+export const reauthUser = (user) => {
+  return { type: 'REAUTH_USER',
+    payload: user
+     }
+}
+
+export const setActiveMarker = (name) => {
+  return {
+    type: 'SET_ACTIVE_MARKER',
+    payload: name
   }
 }

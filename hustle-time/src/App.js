@@ -6,8 +6,10 @@ import Home from './containers/Home'
 import { slide as Menu } from 'react-burger-menu'
 import { connect } from 'react-redux'
 // import { fetchLoginUser } from './adapters/authAdapter'
-import { loginUser } from './actions/index'
+import { loginUser, reauthUser, logOut } from './actions/index'
 import { setNewCenter } from './actions'
+import { fetchReauthUser } from './adapters/authAdapter'
+import ArrivalNotification from './components/ArrivalNotification'
 
 class App extends Component {
   
@@ -120,20 +122,41 @@ class App extends Component {
     this.setState({modal:false, menuOpen:false})
   }
 
+  logoutUser = () => {
+    this.props.dispatchedLogout()
+    localStorage.removeItem('token')
+    this.setState({modal:false, menuOpen:false})
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('token')){
+      fetchReauthUser()
+    .then(resp => {
+      this.props.reauthUser(resp.user)
+  })
+  }}
+
+
   render() {
-    let { stations } = this.props
+    let { stations, stations_with_arrivals } = this.props
+  // console.log('stations_with_arrivals: ', stations_with_arrivals)
+  // console.log('nearby_stations', stations_with_arrivals.nearby_stations )
+
     let arrivalNotifications = []
-    if (stations) { arrivalNotifications = stations.map(station => {
-         return <div style={{ height:30, margin:10, padding:5, color:'navy', backgroundColor:'white' }}> {station.name} </div>
+
+    if (stations_with_arrivals.nearby_stations) { arrivalNotifications = stations_with_arrivals.nearby_stations.map(station => {
+         // return <div style={{ height:20, margin:10, padding:5, color:'navy', backgroundColor:'white' }}> {station.name} </div>
+      return <ArrivalNotification arrivals={stations_with_arrivals.arrivals} station={station} /> 
     })}
 
     let buttons
     let modalType
 
-    if (!!this.props.user) {
+    if ( this.props.user ) {
         buttons = 
         [<button onClick={() => this.showModal(1)}>Save Favorite Place</button>,
-        <button onClick={() => this.showModal2()}>Load Favorite Place</button>]
+        <button onClick={() => this.showModal2()}>Load Favorite Place</button>,
+        <button id='logout' onClick={() => this.logoutUser()}>Log Out</button>]
       } else {
         buttons = [<button onClick={() => this.showModal(3)}>Log In </button>,
         <button onClick={() => this.showModal(4)}>Register </button>]
@@ -146,8 +169,8 @@ class App extends Component {
             <h3>Save Favorite Place</h3>
             <input type="text" placeholder="name of location" onChange={(e) => this.setLocationName(e.target.value)} />
             <p style={{fontSize:".2em", fontStyle:'italic'}}>{this.props.currentPosition.lat}, {this.props.currentPosition.lng}</p>
-            <p> <button className="bm-item" onClick={this.saveLocation}>save</button></p>
-            <p><button onClick={() => this.hideModal()}>Close</button></p>
+            <button className="bm-item" onClick={this.saveLocation}>Save</button>
+            <button className="bm-item" onClick={() => this.hideModal()}>Close</button>
           </Modal>
         </div>
     } else if (this.state.modalType === 2) {
@@ -155,7 +178,8 @@ class App extends Component {
       modalType = <div>
         <Modal isOpen={this.state.modal} onClose={() => this.hideModal()}>
         <h2>Favorite Places</h2>
-        <ul>{this.showSavedLocations()}</ul>
+        <ul style={{listStyle: 'none', padding: 0, margin: 5 }} >{this.showSavedLocations()}</ul>
+        <button className="bm-item" onClick={() => this.hideModal()}>Close</button>
         </Modal>
       </div>
 
@@ -166,8 +190,8 @@ class App extends Component {
             {(this.state.errors) ? <p>{ this.state.errors }</p> : null }
             <input className="bm-item" type="text" placeholder="username" onChange={(e) => this.setUserName(e.target.value)}/>
             <input className="bm-item" type="password" placeholder="password" onChange={(e) => this.setUserPassword(e.target.value)}/>
-            <button className="bm-item" onClick={() => this.handleSubmit()}>submit</button>
-            <p><button className="bm-item" onClick={() => this.hideModal()}>Close</button></p>
+            <button className="bm-item" onClick={() => this.handleSubmit()}>Submit</button>
+            <button className="bm-item" onClick={() => this.hideModal()}>Close</button>
           </Modal>
         </div>
     } else if (this.state.modalType === 4) {
@@ -177,8 +201,8 @@ class App extends Component {
             {(this.state.errors) ? <p>{ this.state.errors }</p> : null }
             <input className="bm-item" type="text" placeholder="username" onChange={(e) => this.setUserName(e.target.value)}/>
             <input className="bm-item" type="password" placeholder="password" onChange={(e) => this.setUserPassword(e.target.value)}/>
-            <button className="bm-item" onClick={() => this.handleRegSubmit()}>submit</button>
-            <p><button className="bm-item" onClick={() => this.hideModal()}>Close</button></p>
+            <button className="bm-item" onClick={() => this.handleRegSubmit()}>Submit</button>
+            <button className="bm-item" onClick={() => this.hideModal()}>Close</button>
           </Modal>
         </div>
     }
@@ -200,7 +224,7 @@ class App extends Component {
         <main>
           <Home />
         </main>
-            <div style={{ position: 'absolute', bottom: 0, left:0, right:0, backgroundColor:'lightGray' }}>
+            <div style={{ maxHeight: '30vh', overflow: 'scroll', position: 'absolute', bottom: 0, left:0, right:0, backgroundColor:'lightGray' }}>
               {arrivalNotifications}
             </div>
       </div>
@@ -212,14 +236,17 @@ const mapStateToProps = (state) => {
   return {
     currentPosition: state.currentPosition,
     stations: state.stations.nearby_stations,
-    user: state.user
+    user: state.user,
+    stations_with_arrivals: state.stations
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchLoginUser: (user, password) => dispatch(loginUser(user, password)),
-    dispatchedNewCenter: (coords) => dispatch(setNewCenter(coords))
+    dispatchedNewCenter: (coords) => dispatch(setNewCenter(coords)),
+    reauthUser: (user) => dispatch(reauthUser(user)),
+    dispatchedLogout: () => dispatch(logOut())
   }
 } 
 

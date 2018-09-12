@@ -24,11 +24,23 @@ const reducer = (state = initialState, action) => {
 	      user: action.payload.user
 	    }
 
+	  case 'REAUTH_USER':
+	  	return {
+	  		...state,
+	  		user: action.payload
+	  	}
+
     case 'LOGOUT_USER':
 	    return {
-	    	...state,
-	      user: {}
+	    	currentPosition: state.currentPosition,
+	    	stations: state.stations
 	    }
+
+	   case 'SET_ACTIVE_MARKER':
+	   	return {
+	   		...state,
+	   		activeMarker: action.payload
+	   	}
 
 		default:
 			return state

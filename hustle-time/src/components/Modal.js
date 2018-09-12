@@ -13,10 +13,10 @@ export default class Modal extends Component {
       zIndex: '9999',
       background: '#DDD',
       borderRadius: '8px',
-      border: '1px solid black',
+      border: '2px solid black',
       color: 'black',
       margin: '2px',
-      padding: '1em'
+      padding: '0.5em'
     }
 
     let backdropStyle = {

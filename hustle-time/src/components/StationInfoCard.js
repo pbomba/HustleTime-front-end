@@ -5,14 +5,13 @@ import React from "react";
 
 const StationInfoCard = (props) => {
 
-	let timeNow = 1536415534 - 120
+	let timeNow = Math.floor(new Date().getTime() / 1000) - 60
 
-	//Math.floor(new Date().getTime() / 1000)
 
 	let stationName = props.station.station
 	
-	if (stationName.length > 19) {
-		stationName = stationName.substring(0, 16)+"..."
+	if (stationName.length > 27) {
+		stationName = stationName.substring(0, 24)+"..."
 	}
 
 	let nb = []
@@ -52,6 +51,8 @@ const StationInfoCard = (props) => {
 			</div>
 	)
 }
+
+
 
 
 export default StationInfoCard

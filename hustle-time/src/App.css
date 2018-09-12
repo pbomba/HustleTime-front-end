@@ -18,11 +18,9 @@
   font-size: large; }
 
 .bm-burger-button {
-  position: fixed;
   width: 4em;
   height: 4em;
-  left: 1em;
-  top: 1em;
+  padding: 1em;
 }
 
 #stationCard {
@@ -33,7 +31,7 @@
 }
 
 .bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, .7) !important;
 }
 
 .bm-item-list {
@@ -41,21 +39,34 @@
   padding: 0.8em;
 }
 
-.bm-cross {
-  background: #bdc3c7;
-  color: #000;
+span.bm-cross {
+  background: black;
 }
 
-/*.bm-item {
-  padding: 1em;
+
+.bm-item {
+  padding: 0 1em;
   font: 16px helvetica, sans-serif;
-  font-weight: bold;
-  color: black;
-  background-color: #33ccff;
+  /*font-weight: bold;*/
+  /*color: black;*/
+  background-color: black;
   border: 1px solid black;
-  border-radius: 8px;
-  margin: 2px;
-}*/
+  /*border-radius: 35px;*/
+  margin: .5rem 2px;
+  color: white;
+  height: 2rem;
+  vertical-align: center;
+}
+
+.bm-item:hover {
+  color: black;
+  background-color: white;
+}
+
+#logout {
+  position:fixed;
+  bottom:20px;
+}
 
 .gm-style-iw {
   min-width: 200px !important;
@@ -77,10 +88,10 @@
   }
 }
 
-.gm-style-iw + div {
+/*.gm-style-iw + div {
   right: -35% !important;
   top: 0 !important;  
-}
+}*/
 
 
 /*#iw-container {

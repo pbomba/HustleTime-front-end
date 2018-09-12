@@ -27,12 +27,6 @@ class MapComponent extends Component {
 		})
 	}
 
-	// getGoogleCode = () => {
-	// 	let formattedCenterPoint = `${this.props.currentPosition.lat},${this.props.currentPosition.lng}`
-	// 	console.log("center: ", formattedCenterPoint)
-	// 	fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${formattedCenterPoint}&radius=200&type=subway_station&key=AIzaSyBTpKcUq12DgAh391xO5DpRU8q3DUb3kZ4`).then(resp => resp.json()).then(json => console.log(json))
-	// }
-
 	getLocation = () => {
 		navigator.geolocation.getCurrentPosition(currentPosition => {
 			this.props.dispatchedNewCenter({lat: currentPosition.coords.latitude, lng:currentPosition.coords.longitude})
@@ -78,7 +72,7 @@ class MapComponent extends Component {
 			  })
 			}
 		}
-		console.log(this.props.currentPosition)
+
 		return (
 			<div>
 				<GoogleMap

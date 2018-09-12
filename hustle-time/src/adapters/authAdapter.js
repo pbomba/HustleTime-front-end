@@ -13,7 +13,7 @@ export const fetchLoginUser = (username, password) => {
 }
 
 export const fetchReauthUser = () => {
-  const url = 'http://localhost:3000/api/v1/auth'
+  const url = 'http://localhost:3000/api/v1/reauth'
   const options = {
     headers: {
       'Content-Type': 'application/json',
