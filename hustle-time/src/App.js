@@ -138,15 +138,14 @@ class App extends Component {
 
 
   render() {
-    let { stations, stations_with_arrivals } = this.props
+    let { stations_with_arrivals } = this.props
   // console.log('stations_with_arrivals: ', stations_with_arrivals)
   // console.log('nearby_stations', stations_with_arrivals.nearby_stations )
 
     let arrivalNotifications = []
-
     if (stations_with_arrivals.nearby_stations) { arrivalNotifications = stations_with_arrivals.nearby_stations.map(station => {
          // return <div style={{ height:20, margin:10, padding:5, color:'navy', backgroundColor:'white' }}> {station.name} </div>
-      return <ArrivalNotification arrivals={stations_with_arrivals.arrivals} station={station} /> 
+      return <ArrivalNotification key={station.id} arrivals={stations_with_arrivals.arrivals} station={station} /> 
     })}
 
     let buttons
@@ -154,12 +153,12 @@ class App extends Component {
 
     if ( this.props.user ) {
         buttons = 
-        [<button onClick={() => this.showModal(1)}>Save Favorite Place</button>,
-        <button onClick={() => this.showModal2()}>Load Favorite Place</button>,
-        <button id='logout' onClick={() => this.logoutUser()}>Log Out</button>]
+        [<button key='save' onClick={() => this.showModal(1)}>Save Favorite Place</button>,
+        <button key='load' onClick={() => this.showModal2()}>Load Favorite Place</button>,
+        <button key='log_out' id='logout' onClick={() => this.logoutUser()}>Log Out</button>]
       } else {
-        buttons = [<button onClick={() => this.showModal(3)}>Log In </button>,
-        <button onClick={() => this.showModal(4)}>Register </button>]
+        buttons = [<button key='log_in' onClick={() => this.showModal(3)}>Log In </button>,
+        <button key='register' onClick={() => this.showModal(4)}>Register </button>]
       } 
 
     if (this.state.modalType === 1) {

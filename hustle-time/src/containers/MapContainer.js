@@ -5,7 +5,6 @@ import config from '../config';
 
 class MapContainer extends PureComponent {
 
-
   render() {
     return (
 			<div>

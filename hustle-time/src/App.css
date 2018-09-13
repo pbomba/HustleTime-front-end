@@ -88,10 +88,10 @@ span.bm-cross {
   }
 }
 
-/*.gm-style-iw + div {
-  right: -35% !important;
+.gm-style-iw + div {
+  visibility: hidden;
   top: 0 !important;  
-}*/
+}
 
 
 /*#iw-container {

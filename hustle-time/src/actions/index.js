@@ -1,5 +1,5 @@
 import { LOGOUT_USER, LOGIN_USER } from './types'
-import { fetchLoginUser, fetchReauthUser } from '../adapters/authAdapter'
+import { fetchLoginUser } from '../adapters/authAdapter'
 
 
 export const setNewCenter = (coords) => {

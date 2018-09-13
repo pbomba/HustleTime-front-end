@@ -6,8 +6,8 @@ import youAreHere from '../youAreHere.png';
 class youAreHereMarker extends PureComponent {
 
 	state = {
-		lat: '',
-		lng: ''
+		lat: 0,
+		lng: 0
 	}
 
 	getUserLocation = () => {

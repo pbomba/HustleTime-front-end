@@ -79,7 +79,7 @@ class MapComponent extends Component {
 				<GoogleMap
 					ref = {this.mapLoaded.bind(this)}
 					defaultZoom={15}
-					defaultOptions={{mapTypeControl: false, fullscreenControl: false, streetViewControl: false}}
+					defaultOptions={{mapTypeControl: false, fullscreenControl: false, streetViewControl: false, zoomControl: false}}
 					center={this.props.currentPosition}
 					onDragEnd={this.mapMoved.bind(this)}
 					clickableIcons={false} >
