@@ -9,8 +9,8 @@ class StationMarker extends PureComponent {
 
 
 	render(){
-		return (
 
+		return (
 			<React.Fragment>
 			{this.props.arrival.id > 1 ? null : <Marker
 				position={this.props.location}

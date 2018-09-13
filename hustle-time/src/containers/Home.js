@@ -13,18 +13,4 @@ class Home extends PureComponent {
   }
 }
 
-
-// const mapStateToProps = (state) => {
-// 	return {
-// 		currentPosition: state.currentPosition,
-// 		stations: state.stations
-// 	}
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//   	dispatchedNewCenter: (coords) => dispatch(setNewCenter(coords))
-//   }
-// }
-
 export default Home;

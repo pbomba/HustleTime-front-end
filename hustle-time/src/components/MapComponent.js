@@ -3,6 +3,7 @@ import {withScriptjs, withGoogleMap, GoogleMap, Circle } from "react-google-maps
 import StationMarker from './StationMarker'
 import { setNewCenter, fetchStations } from '../actions'
 import { connect } from 'react-redux'
+import YouAreHereMarker from './YouAreHereMarker'
 
 class MapComponent extends Component {
 
@@ -84,9 +85,12 @@ class MapComponent extends Component {
 					clickableIcons={false} >
 					{this.props.stations ? markers() : null}
 				</GoogleMap>
+				<YouAreHereMarker />
 				<Circle
 					center={this.props.currentPosition}
-					radius={5} />
+					radius={500}
+					defaultOptions={{strokeWeight:0.5, fillColor: '#33ccff', fillOpacity:.1}}
+					 />
 			</div>
 		)
 	}
