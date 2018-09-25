@@ -62,7 +62,7 @@ class MapComponent extends Component {
 				if(this.props.stations.nearby_stations){
 				return this.props.stations.nearby_stations.map( (station, idx) => {
 					const arrivals = this.props.stations.arrivals.filter(arrival => {
-						return arrival.nearby_station_id === station.id
+						return arrival.station.substring(0,3) === station.code
 					})
 					return (<StationMarker
 	          key={station.id}
@@ -74,6 +74,7 @@ class MapComponent extends Component {
 			}
 		}
 
+// console.log(this.props.stations.arrivals ? this.props.stations.arrivals[0].station.substring(0,3) : "none")
 		return (
 			<div>
 				<GoogleMap

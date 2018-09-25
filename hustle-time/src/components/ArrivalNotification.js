@@ -16,7 +16,7 @@ const ArrivalNotification = (props) => {
 	let nba = ''
 	let sba = ''
 
-	let station_arrivals = props.arrivals.filter( arr => arr.station === props.station.station_code )
+	let station_arrivals = props.arrivals.filter( arr => arr.station.substring(0,3) === props.station.code )
 
 	station_arrivals.forEach ( arrival => {
 		if (arrival.direction === 'N') {

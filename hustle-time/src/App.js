@@ -136,8 +136,8 @@ class App extends Component {
   })
   }}
 
-
   render() {
+    
     let { stations_with_arrivals } = this.props
   // console.log('stations_with_arrivals: ', stations_with_arrivals)
   // console.log('nearby_stations', stations_with_arrivals.nearby_stations )
@@ -248,6 +248,5 @@ const mapDispatchToProps = (dispatch) => {
     dispatchedLogout: () => dispatch(logOut())
   }
 } 
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
